@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
     body,
     h1,
     h4,
+    ul,
     p {
         margin: 0;
     }
@@ -19,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
     /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
     ul {
         list-style: none;
+        padding-inline-start: 0;
     }
 
     /* Set core root defaults */
@@ -29,6 +31,7 @@ const GlobalStyle = createGlobalStyle`
     /* Set core body defaults */
     body {
         min-height: 100vh;
+        padding-inline: 1rem;
         text-rendering: optimizeSpeed;
         line-height: 1.5;
         background-color: #CECDFF;

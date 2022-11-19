@@ -4,7 +4,7 @@ const StyledContainer = styled.div`
     max-width: 40rem;
     margin-inline: auto;
     margin-top: 2rem;
-    padding-inline: 1rem;
+    padding: 1rem;
     background-color: rgb(184, 181, 255);
     border-radius: 20px;
 `
