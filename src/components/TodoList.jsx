@@ -14,15 +14,20 @@ const StyledList = styled.section`
     }
 `
 
-const TodoList = ({ toggleTaskCompleted, updateTask, deleteTask }) => {
+const TodoList = ({ toggleTaskCompleted, updateTask, deleteTask, deleteFile, downloadFile }) => {
     const [todos, setTodos] = useState([])
 
     useEffect(() => {
         const q = query(collection(db, 'todos'))
+        
         onSnapshot(q, querySnapshot => {
-            let todosArr = []
-            querySnapshot.forEach(doc => todosArr.push(doc.data()))
+            const todosArr = []
+            querySnapshot.forEach(doc => {
+                todosArr.push(doc.data())
+            })
             setTodos(todosArr)
+        }, (error) => {
+            console.log(error);
         })
     }, [])
 
@@ -38,6 +43,7 @@ const TodoList = ({ toggleTaskCompleted, updateTask, deleteTask }) => {
                         toggleTaskCompleted={toggleTaskCompleted}
                         updateTask={updateTask}
                         deleteTask={deleteTask}
+                        deleteFile={deleteFile}
                     />
                 )}
             </ul>

@@ -32,6 +32,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         min-height: 100vh;
         padding-inline: 1rem;
+        font-family: 'Karla', sans-serif;
         text-rendering: optimizeSpeed;
         line-height: 1.5;
         background-color: #CECDFF;

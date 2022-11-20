@@ -1,25 +1,38 @@
 import { useState } from "react"
 import styled from "styled-components"
 import { useForm } from "react-hook-form";
+import { MdEdit, MdDelete } from 'react-icons/md'
 
 const StyledTodo = styled.li`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 1.5rem;
-    padding-inline: 1rem;
+    padding: .5rem 1rem;
     background-color: rgb(122, 125, 204);
+    border-radius: 10px;
 
     > :nth-child(2) {
         width: 100%;
     }
 
-    > :nth-child(3) {
+    .btn-group {
         display: flex;
         gap: .5rem;
+
+        button {
+            cursor: pointer;
+            border: 0;
+            background: 0;
+
+            &:hover {
+                opacity: .5;
+            }
+        }
     }
 `
 
-const Todo = ({ id, title, text, date, completed, toggleTaskCompleted, updateTask, deleteTask }) => {
+const Todo = ({ id, title, text, date, completed, fileURL, toggleTaskCompleted, updateTask, deleteTask, deleteFile }) => {
     const [isEditing, setIsEditing] = useState(false)
     const { register, handleSubmit } = useForm({
         defaultValues: {
@@ -40,9 +53,10 @@ const Todo = ({ id, title, text, date, completed, toggleTaskCompleted, updateTas
                 <h4>{title}</h4>
                 <p>{text}</p>
             </div>
-            <div>
-                <button onClick={() => setIsEditing(true)}>Edit</button>
-                <button onClick={() => deleteTask(id)}>Delete</button>
+            {fileURL && <a href={fileURL} target='_blank' download>File</a>}
+            <div className="btn-group">
+                <button onClick={() => setIsEditing(true)}><MdEdit size={18} /></button>
+                <button onClick={() => { deleteTask(id); deleteFile(title) }}><MdDelete size={18} /></button>
             </div>
         </>
     )

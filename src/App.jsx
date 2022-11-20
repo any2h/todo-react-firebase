@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { db, storage } from './firebase'
 import { setDoc, doc, deleteDoc, updateDoc } from 'firebase/firestore'
+import { ref, deleteObject, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import GlobalStyle from './GlobalStyle'
 import Container from './utils/Container'
 import Header from './components/Header'
@@ -27,7 +28,7 @@ function App() {
         }
     }
 
-    const updateTask = async ({ id, ...todo}) => {
+    const updateTask = async ({ id, ...todo }) => {
         try {
             await updateDoc(doc(db, 'todos', id), {
                 ...todo
@@ -45,18 +46,39 @@ function App() {
         }
     }
 
+    const downloadFile = async (id) => {
+        try {
+            const fileRef = ref(storage, id)
+            const URL = await getDownloadURL(fileRef)
+            console.log(URL)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const deleteFile = async (name) => {
+        try {
+            const fileRef = ref(storage, name)
+            await deleteObject(fileRef)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className="App">
             <Container>
                 <GlobalStyle />
-                <Header 
+                <Header
                     addTask={addTask}
                 />
-                <TodoList 
+                <TodoList
                     toggleTaskCompleted={toggleTaskCompleted}
                     updateTask={updateTask}
                     deleteTask={deleteTask}
-                 />
+                    deleteFile={deleteFile}
+                    downloadFile={downloadFile}
+                />
             </Container>
         </div>
     )
