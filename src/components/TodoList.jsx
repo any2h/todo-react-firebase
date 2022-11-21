@@ -1,24 +1,23 @@
 import { useState, useEffect } from "react"
 import styled from "styled-components"
 import { db } from "../firebase"
-import { query, collection, onSnapshot } from 'firebase/firestore'
+import { query, collection, onSnapshot, orderBy } from 'firebase/firestore'
 import Todo from "./Todo"
 
 const StyledList = styled.section`
-    margin-top: 1rem;
+    margin-top: 2rem;
     
-    ul {
-        > *+* {
-            margin-top: 1rem;
-        }
+    ul > *+* {
+        margin-top: 1rem;
     }
+    
 `
 
-const TodoList = ({ toggleTaskCompleted, updateTask, deleteTask, deleteFile, downloadFile }) => {
+const TodoList = () => {
     const [todos, setTodos] = useState([])
 
     useEffect(() => {
-        const q = query(collection(db, 'todos'))
+        const q = query(collection(db, 'todos'), orderBy('createdAt', 'desc'))
         
         onSnapshot(q, querySnapshot => {
             const todosArr = []
@@ -40,10 +39,6 @@ const TodoList = ({ toggleTaskCompleted, updateTask, deleteTask, deleteFile, dow
                     <Todo 
                         key={todo.id} 
                         {...todo} 
-                        toggleTaskCompleted={toggleTaskCompleted}
-                        updateTask={updateTask}
-                        deleteTask={deleteTask}
-                        deleteFile={deleteFile}
                     />
                 )}
             </ul>
