@@ -38,23 +38,10 @@ const GlobalStyle = createGlobalStyle`
         background-color: #CECDFF;
     }
 
-    /* A elements that don't have a class get default styles */
-    a:not([class]) {
-        text-decoration-skip-ink: auto;
-    }
-
-    /* Make images easier to work with */
-    img,
-    picture {
-        max-width: 100%;
-        display: block;
-    }
-
     /* Inherit fonts for inputs and buttons */
     input,
     button {
         font: inherit;
-        ${'' /* cursor: pointer; */}
     }
 
     input {

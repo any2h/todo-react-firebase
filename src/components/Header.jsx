@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { nanoid } from "nanoid";
-import { useForm } from "react-hook-form";
 import { addTask, uploadFile } from "../firebase";
+import { useForm } from "react-hook-form";
+import { nanoid } from "nanoid";
 import styled from 'styled-components'
 
 const StyledHeader = styled.header`
@@ -14,10 +14,6 @@ const StyledHeader = styled.header`
         display: flex;
         flex-wrap: wrap;
         gap: 1.5rem;
-
-        > *+* {
-            /* margin-top: 1rem; */
-        }
 
         > :first-child {
             display: flex;
@@ -68,19 +64,19 @@ const Header = () => {
                         {...register('title', { required: true })}
                     />
                     <input 
-                        type="text" 
-                        name='text' 
+                        type="text"
+                        name='text'
                         placeholder="Текст"
                         {...register('text', { required: true })}
                     />
                     <input 
-                        type="datetime-local" 
+                        type="datetime-local"
                         name='date'
                         {...register('date')}
                     />
                     <input 
                         type="file" 
-                        accept=".jpg, .png, .webp, .doc, .docx, .pdf, .txt" 
+                        accept=".jpg, .png, .webp, .doc, .docx, .pdf, .txt"
                         onChange={(e) => setFile(e.target.files[0])}
                     />
                 <input type='submit' />

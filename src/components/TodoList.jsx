@@ -10,7 +10,6 @@ const StyledList = styled.section`
     ul > *+* {
         margin-top: 1rem;
     }
-    
 `
 
 const TodoList = () => {
@@ -29,8 +28,6 @@ const TodoList = () => {
             console.log(error);
         })
     }, [])
-
-    console.log(todos);
 
     return (
         <StyledList>

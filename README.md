@@ -1,0 +1,1 @@
+simple todo app built with react, react-hook-form, styled-components, and firebase

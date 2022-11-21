@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { toggleTaskCompleted, updateTask, deleteTask, deleteFile, uploadFile } from "../firebase";
-import styled from "styled-components"
 import { useForm } from "react-hook-form";
-import { MdEdit, MdDelete } from 'react-icons/md'
 import dayjs from 'dayjs'
+import styled from "styled-components"
+import { MdEdit, MdDelete } from 'react-icons/md'
 
 const StyledTodo = styled.li`
     display: flex;
@@ -14,6 +14,7 @@ const StyledTodo = styled.li`
     background-color: ${props => props.expired ? 'rgba(221, 69, 108, 0.5)' : 'rgb(122, 125, 204)'};
     border-radius: 10px;
     opacity: ${props => props.completed ? '.5': '1'};
+    transition: all .2s ease-in-out;
 
     > :nth-child(2) {
         width: 100%;
@@ -60,7 +61,7 @@ const Todo = ({ id, title, text, date, completed, fileURL }) => {
         defaultValues: {
             title,
             text,
-            date
+            date,
         }
     })
     const [newFile, setNewFile] = useState(null)
@@ -107,14 +108,22 @@ const Todo = ({ id, title, text, date, completed, fileURL }) => {
             <input 
                 type="text" 
                 placeholder="Заголовок"
-                {...register('title', { required: true })} 
+                {...register('title', { required: true })}
             />
             <input 
                 type="text" 
                 placeholder="Текст"
-                {...register('text', { required: true })} />
-            <input type="datetime-local" {...register('date')} />
-            <input type='file' onChange={(e) => setNewFile(e.target.files[0])} />
+                {...register('text', { required: true })}
+            />
+            <input 
+                type="datetime-local"
+                {...register('date')} 
+            />
+            <input 
+                type='file' 
+                accept=".jpg, .png, .webp, .doc, .docx, .pdf, .txt"
+                onChange={(e) => setNewFile(e.target.files[0])}
+            />
             <input type="submit" value='Save' />
         </form>
     )
